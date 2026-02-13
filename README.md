@@ -379,4 +379,4 @@ The API returns standardized error responses:
 **Pranay Dasoju**
 
 - GitHub: [@pranay-dasoju](https://github.com/pranay-dasoju)
-- LinkedIn: [Connect with me](www.linkedin.com/in/pranay-kumar-dasoju)
+- LinkedIn: [Connect with me](https://www.linkedin.com/in/pranay-kumar-dasoju)
