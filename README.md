@@ -1,4 +1,4 @@
-# myContacts - Contact Management REST API
+# Contact Management API
 
 A secure, production-ready RESTful API for managing personal contacts with user authentication and authorization. Built with Node.js, Express.js, PostgreSQL, and Prisma ORM.
 
