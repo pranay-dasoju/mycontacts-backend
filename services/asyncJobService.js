@@ -57,7 +57,16 @@ class AsyncJobService {
     const mailReq = {
       to: process.env.DUMMY_MAIL_ADDRESS,
       subject: "Contact deleted!!",
-      html: `Please be informed that - ${contact.name} contact has been deleted`,
+      html: `
+      <p>Please be informed that - ${contact.name} contact has been deleted.</p>
+
+      <h3>Contact Details:</h3>
+      <ul>
+        <li><strong>Name:</strong> ${contact.name}</li>
+        <li><strong>Email:</strong> ${contact.email}</li>
+        <li><strong>Mobile:</strong> ${contact.mobile}</li>
+      </ul>
+      `,
     };
 
     mailService.sendMail(mailReq);
