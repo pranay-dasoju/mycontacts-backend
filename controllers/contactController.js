@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const prismaClient = require("../utils/prismaUtil");
+const eventPublisher = require("../services/pubsub/publisher");
 
 // private access only
 const getContacts = asyncHandler(async (req, res) => {
@@ -27,16 +28,19 @@ const createContact = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("All fields are mandatory!!");
   }
-  const userId = req.user.id;
+  const user = req.user;
 
   const contact = await prismaClient.contacts.create({
     data: {
       name: name,
       email: email,
       mobile: mobile,
-      user_id: userId,
+      user_id: user.id,
     },
   });
+
+  await eventPublisher.publishEvent("CONTACT_CREATED", contact, user.email);
+  console.log("[contactController]event published: CONTACT_CREATED");
 
   res.status(200).json({
     message: "contact recorded successfully",
@@ -93,6 +97,12 @@ const updateContactById = asyncHandler(async (req, res) => {
   });
 
   console.log("[updateContactById]updatedContact:", result);
+
+  const user = req.user;
+
+  await eventPublisher.publishEvent("CONTACT_UPDATED", contact, user.email);
+  console.log("[contactController]event published: CONTACT_UPDATED");
+
   res.status(200).json({
     message: "contact updated successfully",
     data: result,
@@ -126,6 +136,11 @@ const deleteContactById = asyncHandler(async (req, res) => {
   });
 
   console.log("[deleteContactById] query result:", result);
+
+  const user = req.user;
+
+  await eventPublisher.publishEvent("CONTACT_DELETED", contact, user.email);
+  console.log("[contactController]event published: CONTACT_DELETED");
 
   res.status(200).json({
     message: "Contact delete successful",
