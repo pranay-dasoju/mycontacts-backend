@@ -8,10 +8,10 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "pubsub": "node ./local_setup/pubsub/setup-pubsub.js",
     "start": "node server.js",
     "dev_api": "nodemon server.js",
-    "dev_job": "nodemon worker.js",
-    "pubsub": "node ./local_setup/pubsub/setup-pubsub.js"
+    "dev_job": "nodemon worker.js"
   },
   "dependencies": {
     "@google-cloud/pubsub": "^5.2.3",

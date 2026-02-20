@@ -19,7 +19,7 @@ const registerUser = asyncHandler(async (req, res) => {
   const hashedPassword = await bcrypt.hash(password, 10);
   console.log("hashed password:", hashedPassword);
 
-  const user = await prismaClient.users.create({
+  const user = await prismaClient.user.create({
     data: {
       username: username,
       email: email,
@@ -42,7 +42,7 @@ const registerUser = asyncHandler(async (req, res) => {
 });
 
 async function isExistingUser(email) {
-  const user = await prismaClient.users.findFirst({
+  const user = await prismaClient.user.findFirst({
     where: {
       email: email,
     },
@@ -58,7 +58,7 @@ const loginUser = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("All fields are mandatory");
   }
-  const user = await prismaClient.users.findFirst({
+  const user = await prismaClient.user.findFirst({
     where: {
       email: email,
     },

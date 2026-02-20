@@ -4,7 +4,7 @@ const eventPublisher = require("../services/pubsub/publisher");
 
 // private access only
 const getContacts = asyncHandler(async (req, res) => {
-  const contacts = await prismaClient.contacts.findMany({
+  const contacts = await prismaClient.contact.findMany({
     where: {
       user_id: req.user.id,
     },
@@ -30,7 +30,7 @@ const createContact = asyncHandler(async (req, res) => {
   }
   const user = req.user;
 
-  const contact = await prismaClient.contacts.create({
+  const contact = await prismaClient.contact.create({
     data: {
       name: name,
       email: email,
@@ -52,7 +52,7 @@ const createContact = asyncHandler(async (req, res) => {
 const getContactById = asyncHandler(async (req, res) => {
   console.log("req:", req.method, req.url, req.body);
   const contactId = Number(req.params.contactId);
-  const contact = await prismaClient.contacts.findUnique({
+  const contact = await prismaClient.contact.findUnique({
     where: {
       id: contactId,
     },
@@ -68,7 +68,7 @@ const getContactById = asyncHandler(async (req, res) => {
 const updateContactById = asyncHandler(async (req, res) => {
   console.log("[updateContactById]req:", req.method, req.url, req.body);
 
-  const contact = await prismaClient.contacts.findFirst({
+  const contact = await prismaClient.contact.findFirst({
     where: {
       id: Number(req.params.contactId),
     },
@@ -84,7 +84,7 @@ const updateContactById = asyncHandler(async (req, res) => {
     throw new Error("User dont have permission to update this contact");
   }
 
-  const result = await prismaClient.contacts.update({
+  const result = await prismaClient.contact.update({
     where: {
       id: Number(req.params.contactId),
     },
@@ -113,7 +113,7 @@ const updateContactById = asyncHandler(async (req, res) => {
 const deleteContactById = asyncHandler(async (req, res) => {
   const contactId = Number(req.params.contactId);
 
-  const contact = await prismaClient.contacts.findFirst({
+  const contact = await prismaClient.contact.findFirst({
     where: {
       id: contactId,
     },
@@ -129,7 +129,7 @@ const deleteContactById = asyncHandler(async (req, res) => {
     throw new Error("User dont have permission to delete this contact");
   }
 
-  const result = await prismaClient.contacts.delete({
+  const result = await prismaClient.contact.delete({
     where: {
       id: contactId,
     },
