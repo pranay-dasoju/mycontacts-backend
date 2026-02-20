@@ -1,4 +1,4 @@
-# myContacts - Contact Management REST API
+# Contact Management Service
 
 A scalable, event-driven RESTful API for managing personal contacts with user authentication, authorization, and real-time email notifications. Built with Node.js, Express.js, PostgreSQL, Prisma ORM, Google Cloud Pub/Sub, and Nodemailer.
 
