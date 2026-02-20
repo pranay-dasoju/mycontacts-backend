@@ -607,7 +607,7 @@ The API returns standardized error responses:
 - Error logs for debugging
 - Graceful error handling in worker process
 
-## 🧪 Testing the Email Notifications
+## Testing the Email Notifications
 
 1. Start all services (Pub/Sub emulator, worker, API server)
 2. Create a contact via API:
